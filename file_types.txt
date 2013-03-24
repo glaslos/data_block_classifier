@@ -1,0 +1,38 @@
+txt, csv, log   Text content: plain text, comma-separated values, system log. Note that the csv designation also covers the case where the fields are separated by a different character (, , "|", etc.).
+	Entropy: medium
+	
+html, xml, css   Web mark-up data: HTML-/XML-encoded data; CSS.
+	Entropy: medium
+	
+js, json   JavaScript code, JSON data.
+	Entropy: medium
+	
+base64, base85, hex   Text-encoded binary data: base64/85, hexadecimal encoded data.3
+	Entropy: medium
+	
+jpg, png, gif, fax, jbig   Full-color image data: JPEG, PNG, GIF; bi-tonal images (common in scanned documents): CCITT Fax and JBIG.
+	Entropy: high
+	
+zlib, bz2   General-purpose compression: DEFLATE (RFC 1951) and bzip2 (http://bzip.org).
+	Entropy: high
+	
+pdf   Portable document format documents.
+	Entropy:
+	
+ms-doc, ms-xls, ms-ppt   Microsoft Office 97-2003 compound documents.
+	Entropy:
+	
+ms-docx, ms-xlsx, ms-pptx   Microsoft Office 2007 compound documents.
+	Entropy: 
+	
+mp3, aac   Audio: MPEG layer III, AAC-encoded audio.
+	Entropy: high
+	
+h264, avi, wmv, flv   Video encoding & packaging: H.264, AVI, WMV, Flash video.
+	Entropy: high
+	
+fs-fat, fs-ntfs, fs-ext   Filesystem metadata for FAT, NTFS, ext3.
+	Entropy: medium
+	
+encrypted, random, constant, null   Special cases: encrypted, random, constant data, and unknown data. For the constant designation, at least half the block must be of the same value; constants may be 16 bits.
+	Entropy: high
