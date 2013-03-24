@@ -2,6 +2,7 @@ from PIL import Image
 import numpy
 import random
 
+
 class BytePlot(object):
     
     def __init__(self):

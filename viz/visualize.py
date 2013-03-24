@@ -16,6 +16,7 @@
 
 from pychart import canvas, theme, axis, area, bar_plot, line_plot, line_style
 
+
 class BarChart(object):
 
     def __init__(self):
@@ -29,17 +30,18 @@ class BarChart(object):
         theme.use_color = 1
         theme.reinitialize()
         
-        xaxis=axis.X(label="Char", format = '/a90{}%s', tic_interval = 30)
-        yaxis=axis.Y(label="Frequency", tic_interval = 0.1)
-        ar = area.T(size = (300, 150),
-                    y_range=(0,1),
-                    x_range=(0,255),
+        xaxis = axis.X(label="Char", format='/a90{}%s', tic_interval=30)
+        yaxis = axis.Y(label="Frequency", tic_interval=0.1)
+        ar = area.T(size=(300, 150),
+                    y_range=(0, 1),
+                    x_range=(0, 255),
                     x_axis=xaxis, 
                     y_axis=yaxis
                     )
-        ar.add_plot(bar_plot.T(label="Frequency", data=data, width = 0.1),)
+        ar.add_plot(bar_plot.T(label="Frequency", data=data, width=0.1),)
         ar.draw()
         canvas.close()
+
 
 class LineChart(object):
     def __init__(self):
@@ -53,18 +55,19 @@ class LineChart(object):
         theme.use_color = 1
         theme.reinitialize()
         
-        xaxis=axis.X(label="Char", format = '/a90{}%s', tic_interval = 30)
-        yaxis=axis.Y(label="Frequency", tic_interval=0.1)
-        ar = area.T(size = (300, 150),
-                    y_range=(0,1),
-                    x_range=(0,255),
+        xaxis = axis.X(label="Char", format='/a90{}%s', tic_interval=30)
+        yaxis = axis.Y(label="Frequency", tic_interval=0.1)
+        ar = area.T(size=(300, 150),
+                    y_range=(0, 1),
+                    x_range=(0, 255),
                     x_axis=xaxis,
                     y_axis=yaxis
                     )
-        lp = line_plot.T(label="Frequency", data=data, line_style=line_style.T(width = 0.2))
+        lp = line_plot.T(label="Frequency", data=data, line_style=line_style.T(width=0.2))
         ar.add_plot(lp)
         ar.draw()
         canvas.close()
+
 
 class FrequencyVisualization(object):
     
@@ -72,4 +75,4 @@ class FrequencyVisualization(object):
         #bar = BarChart()
         #bar.bar_chart(data, name)
         line = LineChart()
-        line.line_chart(data, name) 
+        line.line_chart(data, name)
