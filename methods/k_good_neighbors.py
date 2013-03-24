@@ -16,6 +16,7 @@
 
 import math
 
+
 class KGoodNeighbors(object):
     """
     Modification of K nearest neighbors.
@@ -38,7 +39,7 @@ class KGoodNeighbors(object):
     
     def euclidean_distance(self, x, y):
         # Distance between two items
-        return sum([(x[i]-y[i])**2 for i in range(len(x))])
+        return sum([(x[i] - y[i]) ** 2 for i in range(len(x))])
 
     def root_mean_square_deviation(self, x, y):
         # General mean deviation
@@ -51,5 +52,5 @@ class KGoodNeighbors(object):
         # Variation of the candidates coefficients
         return self.root_mean_square_deviation(x, y) / self.arithmetic_mean(x)
 
-    def find_neighbors(self, x, k = 3):
+    def find_neighbors(self, x, k=3):
         pass

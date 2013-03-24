@@ -16,6 +16,7 @@
 
 import math
 
+
 class ShannonEntropy(object):
     """
     

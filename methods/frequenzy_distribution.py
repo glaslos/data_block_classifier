@@ -16,6 +16,7 @@
 
 import math
 
+
 class FrequencyDistribution(object):
     """
     Counting the frequency of bytes. 
@@ -45,10 +46,11 @@ class FrequencyDistribution(object):
         # 5.4739 = 1 + math.log(A) and 0.0114 = 1/A
         A = 87.7
         x = math.fabs(x)
+        y = None
         if x < 0.0114:
-            y = A*x/(5.4739)
+            y = A * x / 5.4739
         elif 0.0114 <= x <= 1:
-            y = (1 + math.log(A*x))/(5.4739)
+            y = (1 + math.log(A * x)) / 5.4739
         return y
     
     def combined_finger_print(self, old_score, num_fprints, new_print):
@@ -59,22 +61,24 @@ class FrequencyDistribution(object):
     def gen_finger_print(self, normalized_frequency_list):
         for item in normalized_frequency_list:
             self.finger_print[item[0]] = self.combined_finger_print(
-                                        self.finger_print[item[0]],
-                                        self.num_fprints, 
-                                        item[1])
+                self.finger_print[item[0]],
+                self.num_fprints,
+                item[1]
+            )
     
-    def to_tuple_list(self, list):
+    def to_tuple_list(self, ret_list):
         tuple_list = []
         for i in range(256):
-            tuple_list.append((i, list[i]))
+            tuple_list.append((i, ret_list[i]))
         return tuple_list
     
     def gen_correlation_list(self, normalized_frequency_list):
         for item in normalized_frequency_list:
             self.correlation_print[item[0]] = self.combined_correlation_factor(
-                    self.correlation_print[item[0]],
-                    self.num_fprints, 
-                    self.correlation_factor(self.correlation_print[item[0]] - item[1]))
+                self.correlation_print[item[0]],
+                self.num_fprints,
+                self.correlation_factor(self.correlation_print[item[0]] - item[1])
+            )
     
     def correlation_factor(self, frequency_diff):
         # generates a correlation factor from a frequency difference. 

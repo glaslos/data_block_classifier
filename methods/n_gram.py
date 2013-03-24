@@ -17,6 +17,7 @@
 from operator import itemgetter
 from collections import defaultdict
 
+
 class NGram(object):
     """
     Find patterns which could server as a file type identifier.
@@ -32,7 +33,7 @@ class NGram(object):
         pass
     
     def calc_ngram(self, inputstring, nlen = 3):
-        ngram_list = [inputstring[x:x+nlen] for x in xrange(len(inputstring)-nlen+1)]
+        ngram_list = [inputstring[x:x + nlen] for x in xrange(len(inputstring) - nlen + 1)]
         ngram_freq = defaultdict(int)
         for j in ngram_list:
             ngram_freq[j] += 1

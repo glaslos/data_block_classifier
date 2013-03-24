@@ -37,7 +37,7 @@ class PrincipleComponent(object):
     
     def calc_mean_vector(self):
         # aka centroid
-        self.mean_vector = [float(sum(row))/float(len(row)) for row in self.total_vars]
+        self.mean_vector = [float(sum(row)) / float(len(row)) for row in self.total_vars]
     
     def dot_product(self, x, y):
         return sum(imap(mul, x, y))
@@ -49,10 +49,11 @@ class PrincipleComponent(object):
         self.num_vars = len(self.total_vars)
         self.calc_mean_vector()
         self.covariance_matrix = [[self.dot_product(map(lambda x: x - self.mean_vector[i], self.total_vars[i]), 
-                                                   map(lambda x: x - self.mean_vector[j], self.total_vars[j])) / float(self.num_distrib - 1)
-                                    for j in range(self.num_vars)]
-                                    for i in range(self.num_vars)
-                                 ]
+                                                    map(lambda x: x - self.mean_vector[j], self.total_vars[j])) /
+                                   float(self.num_distrib - 1)
+                                   for j in range(self.num_vars)]
+                                  for i in range(self.num_vars)
+                                  ]
     
     def calc_eigen(self):
         matrix = numpy.mat(self.covariance_matrix)
@@ -67,7 +68,7 @@ class PrincipleComponent(object):
             self.eigenvalues[j] = float("-inf")
         
     def calc_dimensionality_reduction_error(self):
-        print numpy.sum(numpy.ma.masked_equal(self.eigenvalues, float("-inf")))/2
+        print numpy.sum(numpy.ma.masked_equal(self.eigenvalues, float("-inf"))) / 2
         
     def calc_deviation_vector(self):
         self.empirical_standard_deviation_vector = [numpy.sqrt(self.covariance_matrix[i][i]) for i in range(self.num_vars)]

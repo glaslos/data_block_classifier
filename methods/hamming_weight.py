@@ -14,6 +14,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
+
 class HammingWeight(object):
     """
     Calculates the parity bit. Similar fragments have similar counts.
@@ -25,7 +26,7 @@ class HammingWeight(object):
         pass
 
     def bits_on_count(self, i):
-        i = i - ((i >> 1) & 0x55555555)
+        i -= ((i >> 1) & 0x55555555)
         i = (i & 0x33333333) + ((i >> 2) & 0x33333333)
         return (((i + (i >> 4) & 0xF0F0F0F) * 0x1010101) & 0xffffffff) >> 24
     

@@ -16,6 +16,7 @@
 
 from collections import defaultdict
 
+
 class KolmogorovLikeComplexity(object):
     """
 
@@ -27,26 +28,26 @@ class KolmogorovLikeComplexity(object):
     def __init__(self):
         control = [i for i in range(32)]
         # Adding the delete character (127)
-        control.extend([127,])
+        control.extend([127, ])
         self.character_categories = {
-              "control" : control,
-              "punctuation" : [33, 34, 40, 41, 43, 44, 45, 46, 47, 58, 59, 60, 61, 
-                               62, 63, 91, 93, 94, 123, 125,],
-              "word_divider" : [32,],
-              "typography" : [35, 37, 38, 64, 92, 95, 124, 126,],
-              "currency" : [36,],
-              "diacritical" : [39, 96, ],
-              "uppercase_letters" : [i for i in range(65, 91)],
-              "lowecase_letters" : [i for i in range(97, 123)],
-              "numbers" : [i for i in range(48, 58)],
-              "non_printable" : [i for i in range(128, 256)],
+            "control": control,
+            "punctuation": [33, 34, 40, 41, 43, 44, 45, 46, 47, 58, 59, 60, 61,
+                            62, 63, 91, 93, 94, 123, 125, ],
+            "word_divider": [32, ],
+            "typography": [35, 37, 38, 64, 92, 95, 124, 126, ],
+            "currency": [36, ],
+            "diacritical": [39, 96, ],
+            "uppercase_letters": [i for i in range(65, 91)],
+            "lowecase_letters": [i for i in range(97, 123)],
+            "numbers": [i for i in range(48, 58)],
+            "non_printable": [i for i in range(128, 256)],
         }
-
 
     def gen_lookup_table(self):
         lookup = {}
         for cat, nums in self.character_categories.iteritems():
-            for n in nums: lookup[n] = cat
+            for n in nums:
+                lookup[n] = cat
         print len(lookup)
         
         categorized = defaultdict(list)

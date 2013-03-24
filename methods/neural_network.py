@@ -13,18 +13,18 @@ class NN:
     # calculate a random number where:  a <= rand < b
     def rand(self, a, b):
         random.seed(0)
-        return (b-a)*random.random() + a
+        return (b - a) * random.random() + a
     
     # Make a matrix (we could use NumPy to speed this up)
     def makeMatrix(self, I, J, fill=0.0):
         m = []
         for i in range(I):
-            m.append([fill]*J)
+            m.append([fill] * J)
         return m
     
     def __init__(self, ni, nh, no):
         # number of input, hidden, and output nodes
-        self.input_nodes = ni + 1 # +1 for bias node
+        self.input_nodes = ni + 1  # +1 for bias node
         self.hidden_nodes = nh
         self.output_nodes = no
 
@@ -54,11 +54,11 @@ class NN:
     
     # derivative of our sigmoid function, in terms of the output (i.e. y)
     def dsigmoid(self, y):
-        return 1.0 - y**2
+        return 1.0 - y ** 2
 
     def update(self, inputs):
         if len(inputs) != self.input_nodes - 1:
-            raise ValueError, 'wrong number of inputs'
+            raise ValueError("wrong number of inputs")
 
         # input activations
         for i in range(self.input_nodes - 1):
@@ -69,22 +69,21 @@ class NN:
         for j in range(self.hidden_nodes):
             summ = 0.0
             for i in range(self.input_nodes):
-                summ = summ + self.input_activation[i] * self.wi[i][j]
+                summ += self.input_activation[i] * self.wi[i][j]
             self.hidden_activation[j] = self.sigmoid(summ)
 
         # output activations
         for k in range(self.output_nodes):
             summ = 0.0
             for j in range(self.hidden_nodes):
-                summ = summ + self.hidden_activation[j] * self.wo[j][k]
+                summ += self.hidden_activation[j] * self.wo[j][k]
             self.output_activation[k] = self.sigmoid(summ)
 
         return self.output_activation[:]
 
-
     def backPropagate(self, targets, N, M):
         if len(targets) != self.output_nodes:
-            raise ValueError, 'wrong number of target values'
+            raise ValueError("wrong number of target values")
 
         # calculate error terms for output
         output_deltas = [0.0] * self.output_nodes
@@ -97,14 +96,14 @@ class NN:
         for j in range(self.hidden_nodes):
             error = 0.0
             for k in range(self.output_nodes):
-                error = error + output_deltas[k] * self.wo[j][k]
+                error += output_deltas[k] * self.wo[j][k]
             hidden_deltas[j] = self.dsigmoid(self.hidden_activation[j]) * error
 
         # update output weights
         for j in range(self.hidden_nodes):
             for k in range(self.output_nodes):
                 change = output_deltas[k] * self.hidden_activation[j]
-                self.wo[j][k] = self.wo[j][k] + N*change + M * self.co[j][k]
+                self.wo[j][k] = self.wo[j][k] + N * change + M * self.co[j][k]
                 self.co[j][k] = change
                 #print N*change, M*self.co[j][k]
 
@@ -112,15 +111,14 @@ class NN:
         for i in range(self.input_nodes):
             for j in range(self.hidden_nodes):
                 change = hidden_deltas[j] * self.input_activation[i]
-                self.wi[i][j] = self.wi[i][j] + N*change + M * self.ci[i][j]
+                self.wi[i][j] = self.wi[i][j] + N * change + M * self.ci[i][j]
                 self.ci[i][j] = change
 
         # calculate error
         error = 0.0
         for k in range(len(targets)):
-            error = error + 0.5 * (targets[k] - self.output_activation[k]) ** 2
+            error += 0.5 * (targets[k] - self.output_activation[k]) ** 2
         return error
-
 
     def test(self, patterns):
         for p in patterns:
@@ -135,7 +133,7 @@ class NN:
         for j in range(self.hidden_nodes):
             print self.wo[j]
 
-    def train(self, patterns, iterations = 1000, N = 0.5, M = 0.1):
+    def train(self, patterns, iterations=1000, N=0.5, M=0.1):
         # N: learning rate
         # M: momentum factor
         for i in xrange(iterations):
@@ -146,23 +144,23 @@ class NN:
                 self.update(inputs)
                 error = error + self.backPropagate(targets, N, M)
             if i % 100 == 0:
-                pass #print 'error %-14f' % error
+                pass  # print 'error %-14f' % error
 
 
 def demo():
     # Teach network XOR function
     pat3 = [
-        [[0,0], [0]],
-        [[0,1], [1]],
-        [[1,0], [1]],
-        [[1,1], [0]]
+        [[0, 0], [0]],
+        [[0, 1], [1]],
+        [[1, 0], [1]],
+        [[1, 1], [0]]
     ]
     
     pat = [
-           [[ 0.16452143,  0.11296437, 0.1014837 ], [ 0.16452143,  0.11296437, 0.1014837 ]],
-           [[ 0.16452143,  0.11296437, 0.1014837 ], [ 0.16452143,  0.11296437, 0.1014837 ]],
-           [[ 0.00824927, -0.04947465, -0.03494394], [ 0.00824927, -0.04947465, -0.03494394]]
-          ]
+        [[0.16452143,  0.11296437, 0.1014837], [0.16452143,  0.11296437, 0.1014837]],
+        [[0.16452143,  0.11296437, 0.1014837], [0.16452143,  0.11296437, 0.1014837]],
+        [[0.00824927, -0.04947465, -0.03494394], [0.00824927, -0.04947465, -0.03494394]]
+    ]
     
     # create a network with two input, two hidden, and one output nodes
     n = NN(3, 2, 3)
@@ -171,7 +169,6 @@ def demo():
     # test it
     n.test(pat)
     n.weights()
-
 
 
 if __name__ == '__main__':

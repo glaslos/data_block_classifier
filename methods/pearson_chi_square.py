@@ -16,6 +16,7 @@
 
 import random
 
+
 class PearsonChiSquare(object):
     """
     
@@ -33,12 +34,12 @@ class PearsonChiSquare(object):
         The closer to 1 the return value is, the more similar is the observed sample
         to the expected sample.
         """
-        chi_squared = sum([(observed[i][1] - expected[i][1])**2/expected[i][1] for i in range(256)]) 
-        upper_probability = chi_squared/256
+        chi_squared = sum([(observed[i][1] - expected[i][1]) ** 2 / expected[i][1] for i in range(256)])
+        upper_probability = chi_squared / 256
         return upper_probability
     
-    def train_chi_square(self, data_block = 512):
-        train_set = [0]*data_block
+    def train_chi_square(self, data_block=512):
+        train_set = [0] * data_block
         for i in range(data_block):
             train_set[i] = random.randint(0, 256)
         train_frequency = [(i, train_set.count(i)) for i in range(256)]

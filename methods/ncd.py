@@ -1,5 +1,6 @@
 import zlib
 
+
 class NormalizedCompressionDistance(object):
     """
     
@@ -13,4 +14,5 @@ class NormalizedCompressionDistance(object):
         # http://jon.oberheide.org/ncd/downloads/ncd.py
         compressed_a = zlib.compress(a)
         compressed_b = zlib.compress(b)
-        return (float(len(zlib.compress(a + b)) - len(min(compressed_a, compressed_b)))) / float(len(max(compressed_a, compressed_b)))
+        return (float(len(zlib.compress(a + b)) - len(min(compressed_a, compressed_b)))) / float(len(max(compressed_a,
+                                                                                                         compressed_b)))

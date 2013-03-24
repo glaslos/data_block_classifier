@@ -16,6 +16,7 @@
 
 import math
 
+
 class EntropyRateMarkovChain(object):
     """
     
@@ -25,17 +26,17 @@ class EntropyRateMarkovChain(object):
     """
     def __init__(self, data_block):
         self.data = data_block
-        self.transition_matrix = [[0]*256]*256
+        self.transition_matrix = [[0] * 256] * 256
         self.count_tuples()
         self.calc_distribution()
         self.calc_entropy_rate()
     
     def count_tuples(self):
         last = ord(self.data[0:1])
-        self.transition_matrix[last][last] += 1.0/512.0
+        self.transition_matrix[last][last] += 1.0 / 512.0
         for byte in self.data[1:]:
             current = ord(byte)
-            self.transition_matrix[last][current] += 1.0/512.0
+            self.transition_matrix[last][current] += 1.0 / 512.0
             last = current
     
     def calc_distribution(self):
